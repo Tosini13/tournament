@@ -1,0 +1,39 @@
+.createTournament section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 10px 0px;
+  padding: 10px 5px;
+  border: rgba(100, 100, 100, 0.5) solid 1px;
+  -webkit-transition-property: box-shadow;
+  -webkit-transition-duration: 0.1s;
+  transition-property: box-shadow;
+  transition-duration: 0.1s; }
+  .createTournament section h6, .createTournament section input, .createTournament section div {
+    margin: 5px 10px; }
+  .createTournament section h2 {
+    position: absolute;
+    color: gray; }
+  .createTournament section h6 {
+    text-align: right; }
+  .createTournament section input {
+    text-align: center; }
+  .createTournament section .number {
+    width: 50px; }
+
+.createTournament section:hover {
+  box-shadow: 0px 0px 10px black; }
+  .createTournament section:hover h2 {
+    color: black; }
+
+.myTournament2 {
+  padding: 5px; }
+  .myTournament2 .group {
+    margin: 20px auto;
+    text-align: center; }
+    .myTournament2 .group input {
+      text-align: center; }
+    .myTournament2 .group .groupName {
+      margin-bottom: 2px;
+      font-weight: bold; }
+
+/*# sourceMappingURL=css_my_tournaments.css.map */

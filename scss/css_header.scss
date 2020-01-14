@@ -1,0 +1,57 @@
+@import "_constants.scss";
+
+#myHeader{
+    background-color: $main_color;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    min-height: $menu_height;
+    box-shadow: 0px 10px 25px rgb(0,0,0);
+    z-index: 1;
+    nav{
+        width: $content_size;
+        margin: auto;
+        padding: 1vh 0px;
+        ul:first-child{
+            float: left;
+        }
+        ul:last-child{
+            float: right;
+        }
+        ul{
+            width: min-content;
+            display: flex;
+            flex-direction: row;
+            margin: 0px;
+            list-style: none;
+            li{
+                text-align: center;
+                min-height: 80px;
+                height: min-content;
+                min-width: 100px;
+                width: min-content;
+                color: $links_color;
+                cursor: pointer;
+
+                -webkit-transition-property: color;
+                -webkit-transition-duration: 0.5s;
+                transition-property: color;
+                transition-duration: 0.5s;
+                img{
+                    height: 50px;
+                    width: 50px;
+                    border: $links_color solid 1px;
+                }
+            }
+            li:hover{
+                color: white;
+            }
+        }
+        img{
+            height: 50px;
+            width: 50px;
+            border: $links_color solid 1px;
+        }
+    }
+}

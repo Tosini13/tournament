@@ -1,0 +1,18 @@
+#mybody footer {
+  padding-top: 10px;
+  height: 200px;
+  width: 100%;
+  color: black; }
+  #mybody footer > div {
+    width: 80vw;
+    margin: 0px auto;
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); }
+    #mybody footer > div > div {
+      border-right: rgba(100, 100, 100, 0.5) solid 1px;
+      height: 100%; }
+    #mybody footer > div > div:last-child {
+      border-right: none; }
+
+/*# sourceMappingURL=css_footer.css.map */

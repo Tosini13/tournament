@@ -1,0 +1,47 @@
+#myHeader {
+  background-color: #2b2b2b;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-height: 90px;
+  box-shadow: 0px 10px 25px black;
+  z-index: 1; }
+  #myHeader nav {
+    width: 80vw;
+    margin: auto;
+    padding: 1vh 0px; }
+    #myHeader nav ul:first-child {
+      float: left; }
+    #myHeader nav ul:last-child {
+      float: right; }
+    #myHeader nav ul {
+      width: min-content;
+      display: flex;
+      flex-direction: row;
+      margin: 0px;
+      list-style: none; }
+      #myHeader nav ul li {
+        text-align: center;
+        min-height: 80px;
+        height: min-content;
+        min-width: 100px;
+        width: min-content;
+        color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        -webkit-transition-property: color;
+        -webkit-transition-duration: 0.5s;
+        transition-property: color;
+        transition-duration: 0.5s; }
+        #myHeader nav ul li img {
+          height: 50px;
+          width: 50px;
+          border: rgba(255, 255, 255, 0.5) solid 1px; }
+      #myHeader nav ul li:hover {
+        color: white; }
+    #myHeader nav img {
+      height: 50px;
+      width: 50px;
+      border: rgba(255, 255, 255, 0.5) solid 1px; }
+
+/*# sourceMappingURL=css_header.css.map */

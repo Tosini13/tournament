@@ -1,0 +1,54 @@
+@import "_constants.scss";
+
+.createTournament section{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    margin: 10px 0px;
+    padding: 10px 5px;
+    border: $border;
+    h6, input, div{
+        margin: 5px 10px;
+    }
+    h2{
+        position: absolute;
+        color: gray;
+    }
+    h6{
+        text-align: right;
+    }
+    input{
+        text-align: center;
+    }
+    .number{
+        width: 50px;
+    }
+    .text{
+    }
+
+    -webkit-transition-property: box-shadow;
+    -webkit-transition-duration: 0.1s;
+    transition-property: box-shadow;
+    transition-duration: 0.1s;
+}
+
+.createTournament section:hover{
+    box-shadow: 0px 0px 10px black;
+    h2{
+        color: black;
+    }
+}
+
+.myTournament2{
+    padding: 5px;
+    .group{
+        margin: 20px auto;
+        text-align: center;
+        input{
+            text-align: center;
+        }
+        .groupName{
+            margin-bottom: 2px;
+            font-weight: bold;
+        }
+    }
+}

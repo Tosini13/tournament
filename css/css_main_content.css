@@ -1,0 +1,87 @@
+.myContent {
+  color: black;
+  width: 80vw;
+  margin: auto;
+  margin-top: 110px; }
+  .myContent > div {
+    -webkit-transition-property: box-shadow;
+    -webkit-transition-duration: 0.1s;
+    transition-property: box-shadow;
+    transition-duration: 0.1s; }
+  .myContent > div:hover {
+    box-shadow: 0px 0px 10px black; }
+  .myContent #live {
+    padding: 10px;
+    width: 100%;
+    border: rgba(100, 100, 100, 0.5) solid 1px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; }
+    .myContent #live h3 {
+      color: maroon;
+      position: absolute; }
+    .myContent #live .tournament {
+      float: left;
+      width: 450px; }
+    .myContent #live a {
+      display: block;
+      margin: 5px auto; }
+  .myContent #live:hover {
+    box-shadow: 0px 0px 10px maroon; }
+  .myContent .tournaments {
+    border: rgba(100, 100, 100, 0.5) solid 1px;
+    min-height: 400px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 5px 5px; }
+    .myContent .tournaments > div {
+      -webkit-transition-property: border;
+      -webkit-transition-duration: 1s;
+      transition-property: border;
+      transition-duration: 1s; }
+  .myContent .tournaments:hover > div {
+    border-right: rgba(100, 100, 100, 0.5) solid 1px; }
+  .myContent .tournaments:hover > div:last-child {
+    border: none; }
+  .myContent .tournament {
+    box-shadow: 0px 0px 20px gray;
+    border-radius: 5px;
+    min-height: 150px;
+    margin: 5px auto;
+    width: 90%;
+    padding: 0px 5px;
+    cursor: pointer;
+    -webkit-transition-property: box-shadow;
+    -webkit-transition-duration: 0.5s;
+    transition-property: box-shadow;
+    transition-duration: 0.5s; }
+    .myContent .tournament div > div {
+      float: left;
+      height: 80px;
+      width: 80px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center; }
+    .myContent .tournament p {
+      float: left;
+      margin-left: 5px;
+      height: 80px; }
+  .myContent .tournament:hover {
+    box-shadow: 0px 0px 20px black; }
+  .myContent .button {
+    background-color: transparent;
+    padding: 10px 20px;
+    width: max-content;
+    margin: 10px auto;
+    display: block;
+    box-shadow: 0px 0px 20px gray;
+    border-radius: 5px;
+    -webkit-transition-property: box-shadow;
+    -webkit-transition-duration: 0.5s;
+    transition-property: box-shadow;
+    transition-duration: 0.5s; }
+  .myContent .button:hover {
+    box-shadow: 0px 0px 20px black; }
+
+/*# sourceMappingURL=css_main_content.css.map */

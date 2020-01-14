@@ -1,0 +1,22 @@
+@import "_constants.scss";
+
+#mybody footer{
+    padding-top: $margin_bottom;
+    height: 200px;
+    width: 100%;
+    color: black;
+    & > div{
+        width: $content_size;
+        margin: 0px auto;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        & > div{
+            border-right: $border;
+            height: 100%;
+        }
+        & > div:last-child{
+            border-right: none;
+        }
+    }
+}
