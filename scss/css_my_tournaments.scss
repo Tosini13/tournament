@@ -43,9 +43,6 @@
     .group{
         margin: 20px auto;
         text-align: center;
-        input{
-            text-align: center;
-        }
         .groupName{
             margin-bottom: 2px;
             font-weight: bold;
@@ -54,6 +51,9 @@
     .play_off_match{
         display: grid;
         grid-template-columns: repeat(3,1fr);
+        text-align: center;
+    }
+    input{
         text-align: center;
     }
 }

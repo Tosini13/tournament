@@ -30,14 +30,14 @@
   .myContent .myTournament2 .group {
     margin: 20px auto;
     text-align: center; }
-    .myContent .myTournament2 .group input {
-      text-align: center; }
     .myContent .myTournament2 .group .groupName {
       margin-bottom: 2px;
       font-weight: bold; }
   .myContent .myTournament2 .play_off_match {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    text-align: center; }
+  .myContent .myTournament2 input {
     text-align: center; }
 
 /*# sourceMappingURL=css_my_tournaments.css.map */

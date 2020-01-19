@@ -84,7 +84,7 @@
             <input type="text" name="" placeholder="">
             -->
         </section>
-        <input class="button"name="submit" type="submit" value="Stwórz">
+        <input class="button" name="submit" type="submit" value="Dalej">
     </form>
 </div>
 <!--

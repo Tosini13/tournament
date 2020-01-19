@@ -43,7 +43,9 @@ if (!isset($_SESSION['username'])) {
             $url = "php/" . $_GET['page'] . ".php";
             require $url;
         } else {
-            if(isset($_GET['submit'])) {
+            if (isset($_GET['submit'])) {
+                require 'php/create_tournament_2.php';
+            } elseif ($_GET['update']) {
                 require 'php/create_tournament_2.php';
             } else {
                 require 'php/content.php';
