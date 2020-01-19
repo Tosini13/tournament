@@ -16,8 +16,17 @@
             <input class="text" type="text" name="strona_sponsora" placeholder="">
             <h6>Logo sponsora</h6>
             <input type="image" name="logo_sponsora" placeholder="">
-            <h6>Liczba uczestników</h6>
+            <h6>Tryb Turnieju</h6>
+            <select class="text" name="tournament_mode">
+                <option value='group'>Group</option>
+                <option value='offs'>Play-offs</option>
+                <option value='both'>Group + Play-offs</option>
+            </select>
             <!-- <input class="number" type="text" name="no_participants" placeholder=""> -->
+        </section>
+        <section>
+            <h2>FAZA GRUPOWA</h2>
+            <h6>Liczba uczestników</h6>
             <select class="number" name="no_participants">
                 <?php
                 for ($i = 2; $i < 97; $i++) {
@@ -25,14 +34,11 @@
                 }
                 ?>
             </select>
-        </section>
-        <section>
-            <h2>FAZA GRUPOWA</h2>
             <h6>Ilość grup</h6>
             <select class="number" name="no_groups">
                 <option value="1">1</option>
                 <?php
-                for ($i = 2; $i < 17; $i += 2) {
+                for ($i = 2; $i < 17; $i *= 2) {
                     echo "<option value='" . $i . "'>" . $i . "</option>";
                 }
                 ?>
@@ -53,11 +59,13 @@
             <input class="number" type="text" name="win_points" value="3">
             <h6>Punkty za remis</h6>
             <input class="number" type="text" name="draw_points" value="1">
+            <!-- 
             <h6>Użyj loga uczestników?</h6>
             <input type="checkbox" name="participants_logo" value="">
-            <h6>Uzyj daty meczy (dla wielodniowych turniejów)?</h6>
-            <input type="checkbox" name="" value="">
             <h6>Użyj własne nazwy grup?</h6>
+            <input type="checkbox" name="" value="">
+            -->
+            <h6>Uzyj daty meczy (dla wielodniowych turniejów)?</h6>
             <input type="checkbox" name="" value="">
         </section>
         <section>

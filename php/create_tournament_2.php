@@ -2,22 +2,18 @@
     <div class="myTournament2">
         <?php
         require 'php/compute_tournament.php';
-        for ($i = 0; $i < $no_groups; $i++) {
+        //var_dump($tournament);
+        ?>
+        <h3 id="temp"><?php echo $tournament->get_name(); ?></h3>
+        <?php
+        foreach ($tournament->groups as $index => $group) {
             ?>
-            <div class="group">
-                <h3><?php echo $tournament_name; ?></h3>
-                <input class="groupName" type="text" value="Grupa <?php echo chr($group_name) ?>"><br>
-                <?php $group_name++; ?>
+            <div class="group" id='<?php echo $index ?>'>
+                <input class="groupName" type="text" value="Grupa <?php echo $group->name ?>"><br>
                 <?php
-                if ($rest_teams != 0) {
-                    $add = 1;
-                    $rest_teams--;
-                } else {
-                    $add = 0;
-                }
-                for ($j = 1; $j < $no_teams_in_group + $add; $j++) {
+                foreach ($group->teams as $index => $team) {
                     ?>
-                    <input type="text" placeholder="Zespoł nr <?php echo $j ?>"><br>
+                    <input type="text" placeholder="<?php echo $team->get_name() ?>"><br>
                     <?php
                 }
                 ?>
@@ -28,20 +24,21 @@
     </div>
     <div class="myTournament2">
         <?php
-        for ($i = $no_play_offs; $i >= 1; $i /= 2) {
-            for ($j = 0; $j < $i; $j++) {
+        foreach ($tournament->play_offs->rounds as $round => $matches) {
+            foreach ($matches as $index => $match) {
                 ?>
                 <div>
-                    <h3><?php echo $play_offs[$i]; ?></h3>
+                    <h3><?php echo $match->get_name(); ?></h3>
+                    <div class="play_off_match"><input type="text" placeholder="<?php echo $match->get_team1()->get_name() ?>"> vs <input type="text" placeholder="<?php echo $match->get_team2()->get_name() ?>"></div>
                 </div>
                 <?php
             }
         }
-        ?> <?php
-        for ($i = $place_matches; $i > 1; $i -= 2) {
+        foreach ($tournament->play_offs->places as $place => $match) {
             ?>
             <div>
-                <h3>Mecz o <?php echo $i ?> miejsce</h3>
+                <h3>Mecz o <?php echo $place ?> miejsce</h3>
+                <div class="play_off_match"><input type="text" placeholder="<?php echo $match->get_team1()->get_name() ?>"> vs <input type="text" placeholder="<?php echo $match->get_team2()->get_name() ?>"></div>
             </div>
             <?php
         }

@@ -38,7 +38,7 @@
     }
 }
 
-.myTournament2{
+.myContent .myTournament2{
     padding: 5px;
     .group{
         margin: 20px auto;
@@ -50,5 +50,10 @@
             margin-bottom: 2px;
             font-weight: bold;
         }
+    }
+    .play_off_match{
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        text-align: center;
     }
 }
