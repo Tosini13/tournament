@@ -10,17 +10,28 @@
             $group_iterator = 0;
             foreach ($tournament->groups as $index => $group) {
                 ?>
-                <div class="group" id='<?php echo $index ?>'>
-                    <input class="groupName" name="<?php echo 'group-' . $group_iterator ?>" type="text" value="<?php echo $group->name ?>"><br>
-                    <?php
-                    $team_iterator = 0;
-                    foreach ($group->teams as $index => $team) {
-                        ?>
-                        <input name="<?php echo 'team-' . $group_iterator . '-' . $team_iterator ?>" type="text" placeholder="<?php echo $team->get_name() ?>"><br>
+                <h5><input class="groupName" name="<?php echo 'group-' . $group_iterator ?>" type="text" value="<?php echo $group->name ?>"></h5>
+                <div class="groupStage">
+                    <div class="group" id='<?php echo $index ?>'>
                         <?php
-                        $team_iterator++;
-                    }
-                    ?>
+                        $team_iterator = 0;
+                        foreach ($group->teams as $index => $team) {
+                            ?>
+                            <input name="<?php echo 'team-' . $group_iterator . '-' . $team_iterator ?>" type="text" value="<?php echo $team->get_name() ?>"><br>
+                            <?php
+                            $team_iterator++;
+                        }
+                        ?>
+                    </div>
+                    <div>
+                        <?php
+                        foreach ($group->get_matches() as $index => $match) {
+                            ?>
+                            <div class = "play_off_match"><input type = "text" disabled = "true" value="<?php echo $match->get_team1()->get_name() ?>"> vs <input type = "text" disabled = "true" value = "<?php echo $match->get_team2()->get_name() ?>"></div>
+                            <?php
+                        }
+                        ?>
+                    </div>
                 </div>
                 <?php
                 $group_iterator++;

@@ -40,6 +40,9 @@ class Tournament {
         while ($arg * 2 > $this->participants_qtt) {  //when there's more play offs than participants
             $arg /= 2;
         }
+        if ($arg * 2 < $this->group_qtt) {
+            $arg = $this->group_qtt / 2;
+        }
         //$this->play_offs_qtt = $arg / 2;
         $this->play_offs_qtt = $arg;
     }
@@ -101,13 +104,13 @@ class Tournament {
     //FUNCTIONS
 
     public function declare_groups($group_qtt, $play_offs_qtt) {
-        $this->set_play_offs_qtt($play_offs_qtt);
         $this->set_group_qtt($group_qtt);
+        $this->set_play_offs_qtt($play_offs_qtt);
         //when odd number of participants
         if ($this->get_group_qtt() != 1) {
             $rest_teams = $this->get_participants_qtt() % $this->get_group_qtt();
         } else {
-            $rest_teams = 1;
+            $rest_teams = 0;
         }
 
         for ($i = 0; $i < $this->get_group_qtt(); $i++) {
@@ -126,6 +129,7 @@ class Tournament {
                 $this->groups[$i]->teams[$j] = new Team();
                 $this->groups[$i]->teams[$j]->set_name('Zespół nr ' . ($j + 1) . ' G: ' . $this->groups[$i]->name);
             }
+            $this->groups[$i]->create_matches();
         }
     }
 
@@ -229,8 +233,9 @@ class Group {
     public $name;
     public $teams_qtt;
     public $teams = array();
-    public $result;
+    public $result; //aktualna tabela
     public $promoted_teams_qtt;
+    private $matches = array();
 
     //SET
 
@@ -268,6 +273,12 @@ class Group {
         return $this->teams;
     }
 
+    public function get_matches() {
+        return $this->matches;
+    }
+
+    //FUNCTIONS
+
     public function promoted_teams() {
         $promoted = array();
         for ($i = 0; $i < $this->promoted_teams_qtt; $i++) {
@@ -280,10 +291,45 @@ class Group {
         $this->promoted_teams_qtt = ($play_off * 2) / $groups;
     }
 
+    public function create_matches() {
+        for ($i = 0; $i < count($this->teams) - 1; $i++) {
+            for ($j = $i + 1; $j < count($this->teams); $j++) {
+                $group_match = new Match();
+                $group_match->set_team1($this->teams[$i]);
+                $group_match->set_team2($this->teams[$j]);
+                array_push($this->matches, $group_match);
+            }
+        }
+    }
+
+    public function count_results() {
+        foreach ($this->matches as $key => $match) {
+            
+        }
+    }
+
+    //CONSTRUCTOR
+
     public function __construct($name, $teams_qtt) {
         $this->name = $name;
         $this->teams_qtt = $teams_qtt;
     }
+
+}
+
+// --------------------------------------------------------------------
+// >>>>>>>>>>>>>>>>>>>>>>>>>>GROUP TABLE<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+// --------------------------------------------------------------------
+
+class Group_table {
+
+    public $team;
+    public $points;
+    public $wins;
+    public $loses;
+    public $draws;
+    public $scores;
+    public $lost_goals;
 
 }
 
@@ -306,19 +352,27 @@ class Play_offs {
             $this->rounds[$this->round[$i]] = array();
             for ($j = 0; $j < $i; $j++) {
                 $this->rounds[$this->round[$i]][$j] = new Match();
+                //set name of play-off
                 if ($i != 1) {
                     $this->rounds[$this->round[$i]][$j]->set_name($this->round[$i] . ' ' . ($j + 1));
                 } else {
-                    $this->rounds[$this->round[$i]][$j]->set_name($this->round[$i]);
+                    $this->rounds[$this->round[$i]][$j]->set_name($this->round[$i]); //when final
                 }
             }
         }
     }
 
     public function fill_structure_from_group($groups) {
+        $j = 0;
         for ($i = 0; $i < $this->rounds_qtt; $i++) {
-            $this->rounds[$this->round[$this->rounds_qtt]][$i]->set_team1($groups[$i]->get_team1());
-            $this->rounds[$this->round[$this->rounds_qtt]][$i]->set_team2($groups[$i]->get_team2());
+            $this->rounds[$this->round[$this->rounds_qtt]][$i]->set_team1($groups[$j]->get_team1());
+
+            if ($groups[$j]->get_team2()->get_name() !== null) {
+                $this->rounds[$this->round[$this->rounds_qtt]][$i]->set_team2($groups[$j++]->get_team2());
+            } else {//when there's only one team promoted from each group
+                $this->rounds[$this->round[$this->rounds_qtt]][$i]->set_team2($groups[++$j]->get_team1());
+                $j++;
+            }
         }
     }
 
@@ -396,6 +450,7 @@ class Match {
     public function __construct() {
         $this->team1 = new Team();
         $this->team2 = new Team();
+        $this->set_result(1, 1);
     }
 
 }
@@ -417,22 +472,6 @@ class Team {
     public function get_name() {
         return $this->name;
     }
-
-}
-
-// --------------------------------------------------------------------
-// >>>>>>>>>>>>>>>>>>>>>>>>>>GROUP TABLE<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-// --------------------------------------------------------------------
-
-class Group_table {
-
-    public $team;
-    public $points;
-    public $wins;
-    public $loses;
-    public $draws;
-    public $scores;
-    public $lost_goals;
 
 }
 

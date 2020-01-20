@@ -39,13 +39,19 @@
 }
 
 .myContent .myTournament2{
+        margin-top: 50px;
     padding: 5px;
-    .group{
-        margin: 20px auto;
-        text-align: center;
-        .groupName{
-            margin-bottom: 2px;
-            font-weight: bold;
+    .groupName{
+        margin-top: 50px;
+        margin-bottom: 2px;
+        font-weight: bold;
+    }
+    .groupStage{
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        .group{
+            margin: 20px auto;
+            text-align: center;
         }
     }
     .play_off_match{

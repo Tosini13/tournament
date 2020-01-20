@@ -26,13 +26,18 @@
     color: black; }
 
 .myContent .myTournament2 {
+  margin-top: 50px;
   padding: 5px; }
-  .myContent .myTournament2 .group {
-    margin: 20px auto;
-    text-align: center; }
-    .myContent .myTournament2 .group .groupName {
-      margin-bottom: 2px;
-      font-weight: bold; }
+  .myContent .myTournament2 .groupName {
+    margin-top: 50px;
+    margin-bottom: 2px;
+    font-weight: bold; }
+  .myContent .myTournament2 .groupStage {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); }
+    .myContent .myTournament2 .groupStage .group {
+      margin: 20px auto;
+      text-align: center; }
   .myContent .myTournament2 .play_off_match {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
