@@ -16,6 +16,7 @@ class Tournament {
     private $mode; //0-group; 1-play-offs; 2-both
     public $groups = array();
     public $play_offs;
+    public $teams = array();
 
     //SET
 
@@ -103,7 +104,15 @@ class Tournament {
 
     //FUNCTIONS
 
+    public function declare_teams() {
+        for ($i = 0; $i < $this->participants_qtt; $i++) {
+            $this->teams[$i] = new Team();
+            $this->teams[$i]->set_name("Zespół nr " . ($i + 1));
+        }
+    }
+
     public function declare_groups($group_qtt, $play_offs_qtt) {
+        $team_qtt = 0;
         $this->set_group_qtt($group_qtt);
         $this->set_play_offs_qtt($play_offs_qtt);
         //when odd number of participants
@@ -126,8 +135,8 @@ class Tournament {
             $this->groups[$i]->promoted_teams_qtt($this->group_qtt, $this->get_play_offs_qtt());
             //create teams in group
             for ($j = 0; $j < $this->groups[$i]->teams_qtt; $j++) {
-                $this->groups[$i]->teams[$j] = new Team();
-                $this->groups[$i]->teams[$j]->set_name('Zespół nr ' . ($j + 1) . ' G: ' . $this->groups[$i]->name);
+                $this->groups[$i]->teams[$j] = $this->teams[$team_qtt++];
+                //$this->groups[$i]->teams[$j]->set_name('Zespół nr ' . ($j + 1) . ' G: ' . $this->groups[$i]->name);
             }
             $this->groups[$i]->create_matches();
         }
@@ -159,7 +168,21 @@ class Tournament {
     public function play_offs_preparation() {
         //order group of promoted teams for first round of play-offs
         //reverse
-        $all = $this->promoted_all_teams();
+        $all = array();
+        if ($this->mode == 1) {
+            //DECLARING TEAMS!!!!
+            $all[0] = array();
+            /*
+              for ($i = 0; $i < $this->participants_qtt; $i++) {
+              $team = new Team();
+              $team->set_name("Zespół nr " . ($i + 1));
+              array_push($all[0], $team);
+              }
+             * */
+            $all[0] = $this->teams;
+        } else {
+            $all = $this->promoted_all_teams();
+        }
         $places_qtt = count($all);
         $promoted_qtt = count($all[0]); //group_qtt?!?
         $new_order = array();
@@ -203,6 +226,7 @@ class Tournament {
         $this->participants_qtt = $participants_qtt;
         $this->host = new Entity();
         $this->sponsor = new Entity();
+        $this->declare_teams();
         /*
           //$this->mode = $mode;
           switch ($mode) {
@@ -462,15 +486,24 @@ class Match {
 class Team {
 
     private $name;
+    private $id;
 
     //SET
     public function set_name($arg) {
         $this->name = $arg;
     }
 
+    public function set_id($arg) {
+        $this->id = $arg;
+    }
+
     //SET
     public function get_name() {
         return $this->name;
+    }
+
+    public function get_id() {
+        return $this->id;
     }
 
 }

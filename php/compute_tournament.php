@@ -6,8 +6,20 @@ if (isset($_SESSION['tournament'])) {
 } else {
     $tournament = new Tournament($_GET['name'], $_GET['no_participants']);
     $_SESSION['tournament'] = &$tournament;
-    $tournament->declare_groups($_GET['no_groups'], $_GET['play_offs']);
-    $tournament->declare_play_offs($_GET['play_offs'], $_GET['place_matches']);
+    if (isset($_GET['tournament_mode'])) {
+        $tournament->set_mode($_GET['tournament_mode']);
+        if ($_GET['tournament_mode'] == "0") {
+            //GROUP
+            $tournament->declare_groups($_GET['no_groups'], $_GET['play_offs']);
+        } elseif ($_GET['tournament_mode'] == "1") {
+            //PLAY-OFFS
+            $tournament->declare_play_offs($_GET['play_offs'], $_GET['place_matches']);
+        } else {
+            //BOTH
+            $tournament->declare_groups($_GET['no_groups'], $_GET['play_offs']);
+            $tournament->declare_play_offs($_GET['play_offs'], $_GET['place_matches']);
+        }
+    }
 }
 
 

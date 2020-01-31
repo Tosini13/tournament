@@ -18,9 +18,9 @@
             <input type="image" name="logo_sponsora" placeholder="">
             <h6>Tryb Turnieju</h6>
             <select class="text" name="tournament_mode">
-                <option value='group'>Group</option>
-                <option value='offs'>Play-offs</option>
-                <option value='both'>Group + Play-offs</option>
+                <option value='0'>Group</option>
+                <option value='1'>Play-offs</option>
+                <option value='2'>Group + Play-offs</option>
             </select>
             <!-- <input class="number" type="text" name="no_participants" placeholder=""> -->
         </section>

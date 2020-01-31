@@ -13,15 +13,43 @@ password varchar(255) not null,
 email varchar(20) not null,
 primary key(id));
 
+create table group_stage(
+id int not null,
+teams_qtt int,
+primary key(id));
+
+create table hosts(
+id int not null,
+name varchar(50),
+website varchar(100),
+logo varchar(100),
+primary key(id));
+
+create table sponsors(
+id int not null,
+name varchar(50),
+website varchar(100),
+logo varchar(100),
+primary key(id));
 
 create table tournaments(
-id int auto_increment not null,
+id int not null,
 name varchar(100) not null,
-competitors_num int,
+participants_qtt int,
+group_qtt int,
+play_offs_qtt int,
+no_last_place int,
+tournament_mode int,
+id_groups int,
+id_play_offs int,
 start_date datetime,
 finish_date datetime,
 logo varchar(30),
-primary key(id));
+id_host int,
+id_sponsor int,
+primary key(id),
+foreign key(id_host) references hosts(id),
+foreign key(id_sponsor) references sponsors(id));
 
 create table my_tournaments(
 login_user varchar(20) not null,
