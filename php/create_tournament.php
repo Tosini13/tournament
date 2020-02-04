@@ -22,7 +22,21 @@
                 <option value='1'>Play-offs</option>
                 <option value='2'>Group + Play-offs</option>
             </select>
-            <!-- <input class="number" type="text" name="no_participants" placeholder=""> -->
+            <?php
+            $today = date('Y-m-d');
+            $max_date = date('Y-m-d', strtotime($today . ' +2 years'));
+            ?>
+            <!-- <label for="start">Data rozpoczęcia:</label> -->
+            <h6>Data rozpoczęcia:</h6>
+            <input type="datetime-local" id="meeting-time"
+                   name="start_date" value="<?php echo $today . 'T12:00' ?>"
+                   min="<?php echo $today . 'T00:00' ?>" max="<?php echo $max_date . 'T00:00' ?>">
+            <!-- <label for="start">Data zakończenia:</label> -->
+            <h6>Data zakończenia:</h6>
+            <input type="datetime-local"
+                   name="end_date" value="<?php echo $today . 'T12:00' ?>"
+                   min="<?php echo $today . 'T00:00' ?>" max="<?php echo $max_date . 'T00:00' ?>">
+                        <!-- <input class="number" type="text" name="no_participants" placeholder=""> -->
         </section>
         <section>
             <h2>FAZA GRUPOWA</h2>

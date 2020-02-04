@@ -1,6 +1,6 @@
 <div class="myContent">
     <?php
-    $result = $db->query('select * from tournaments where start_date < ' . date('YmdHis') . ' and finish_date > ' . date('YmdHis'));
+    $result = $db->query('select * from tournament where start_date < ' . date('YmdHis') . ' and finish_date > ' . date('YmdHis'));
     if ($result->rowCount()) {
         ?>
         <div id="live">
@@ -35,7 +35,7 @@
             <h3>DZISIAJ</h3>
             <div>
                 <?php
-                $result = $db->query('select * from tournaments where start_date > ' . date('YmdHis') . ' and start_date < ' . date('Ymd', strtotime('+1day')));
+                $result = $db->query('select * from tournament where start_date > ' . date('YmdHis') . ' and start_date < ' . date('Ymd', strtotime('+1day')));
                 if ($result->rowCount()) {
                     while ($data = $result->fetch()) {
                         $url = '_logos/' . $data['logo'];
@@ -66,7 +66,7 @@
             <h3>WKRÓTCE</h3>
             <div>
                 <?php
-                $result = $db->query('select * from tournaments where start_date > ' . date('Ymd', strtotime('+1day')));
+                $result = $db->query('select * from tournament where start_date > ' . date('Ymd', strtotime('+1day')));
                 if ($result->rowCount()) {
                     while ($data = $result->fetch()) {
                         $url = '_logos/' . $data['logo'];
@@ -97,7 +97,7 @@
             <h3>PRZESZŁE</h3>
             <div>
                 <?php
-                $result = $db->query('select * from tournaments where finish_date < ' . date('YmdHis') . ' order by start_date desc');
+                $result = $db->query('select * from tournament where finish_date < ' . date('YmdHis') . ' order by start_date desc');
                 if ($result->rowCount()) {
                     while ($data = $result->fetch()) {
                         $url = '_logos/' . $data['logo'];

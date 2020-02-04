@@ -6,12 +6,15 @@
 
 class Tournament {
 
+    private $id;
     private $name;
     private $host;
     private $sponsor;
     private $participants_qtt;
     private $group_qtt;
     private $play_offs_qtt; //i.e. quaterfinal
+    private $start_date;
+    private $end_date;
     public $no_last_place;
     private $mode; //0-group; 1-play-offs; 2-both
     public $groups = array();
@@ -68,10 +71,30 @@ class Tournament {
         $this->sponsor->set_url($url);
     }
 
+    public function set_id($arg) {
+        $this->id = $arg;
+    }
+
+    public function set_start_date($arg) {
+        $this->start_date = $this->datetime_validation($arg);
+    }
+
+    public function set_end_date($arg) {
+        $this->end_date = $this->datetime_validation($arg);
+    }
+
     //GET
 
     public function get_name() {
         return $this->name;
+    }
+
+    public function get_start_date() {
+        return $this->start_date;
+    }
+
+    public function get_end_date() {
+        return $this->end_date;
     }
 
     public function get_participants_qtt() {
@@ -102,7 +125,25 @@ class Tournament {
         return $this->sponsor;
     }
 
+    public function get_id() {
+        return $this->id;
+    }
+
     //FUNCTIONS
+
+    function datetime_validation($arg) {
+        if ($arg == '') {
+            return date('Ymd');
+        } else {
+            $arg = str_replace('-', '', $arg);
+            $arg = str_replace(':', '', $arg);
+            $arg = str_replace('T', '', $arg);
+            for ($i = strlen($arg); $i < 14; $i++) {
+                $arg .= "0"; //seconds
+            }
+        }
+        return $arg;
+    }
 
     public function declare_teams() {
         for ($i = 0; $i < $this->participants_qtt; $i++) {
@@ -172,13 +213,6 @@ class Tournament {
         if ($this->mode == 1) {
             //DECLARING TEAMS!!!!
             $all[0] = array();
-            /*
-              for ($i = 0; $i < $this->participants_qtt; $i++) {
-              $team = new Team();
-              $team->set_name("Zespół nr " . ($i + 1));
-              array_push($all[0], $team);
-              }
-             * */
             $all[0] = $this->teams;
         } else {
             $all = $this->promoted_all_teams();
@@ -221,12 +255,14 @@ class Tournament {
 
     //CONSTRUCTORS
 
-    public function __construct($name, $participants_qtt) {
+    public function __construct($name, $participants_qtt, $start_time, $end_time) {
         $this->name = $name;
         $this->participants_qtt = $participants_qtt;
         $this->host = new Entity();
         $this->sponsor = new Entity();
         $this->declare_teams();
+        $this->set_start_date($start_time);
+        $this->set_end_date($end_time);
         /*
           //$this->mode = $mode;
           switch ($mode) {
@@ -254,6 +290,7 @@ class Tournament {
 
 class Group {
 
+    private $id;
     public $name;
     public $teams_qtt;
     public $teams = array();
@@ -279,6 +316,10 @@ class Group {
         $this->teams = $arg;
     }
 
+    public function set_id($arg) {
+        $this->id = $arg;
+    }
+
     //GET
 
     public function get_name() {
@@ -299,6 +340,10 @@ class Group {
 
     public function get_matches() {
         return $this->matches;
+    }
+
+    public function get_id() {
+        return $this->id;
     }
 
     //FUNCTIONS
@@ -347,6 +392,7 @@ class Group {
 
 class Group_table {
 
+    private $id;
     public $team;
     public $points;
     public $wins;
@@ -354,6 +400,17 @@ class Group_table {
     public $draws;
     public $scores;
     public $lost_goals;
+
+    //SET
+
+    public function set_id($arg) {
+        $this->id = $arg;
+    }
+
+    //GET
+    public function get_id() {
+        return $this->id;
+    }
 
 }
 
@@ -364,12 +421,25 @@ class Group_table {
 class Play_offs {
 
     //public $name;
+    private $id;
     public $rounds_qtt;
     public $no_last_place;
     public $rounds = array(); //key=round; values=matches(array)
     public $places = array(); //key=round; values=matches(array)
     public $matches = array();
     public $round = array(1 => "Finał", 2 => "Półfinał", 4 => "Ćwierćfinał", 8 => "1/16", 16 => "1/32");
+
+    //SET
+
+    public function set_id($arg) {
+        $this->id = $arg;
+    }
+
+    //GET
+
+    public function get_id() {
+        return $this->id;
+    }
 
     public function create_structure() {
         for ($i = $this->rounds_qtt; $i >= 1; $i /= 2) {
@@ -378,7 +448,7 @@ class Play_offs {
                 $this->rounds[$this->round[$i]][$j] = new Match();
                 //set name of play-off
                 if ($i != 1) {
-                    $this->rounds[$this->round[$i]][$j]->set_name($this->round[$i] . ' ' . ($j + 1));
+                    $this->rounds[$this->round[$i]][$j]->set_name($this->round[$i]);
                 } else {
                     $this->rounds[$this->round[$i]][$j]->set_name($this->round[$i]); //when final
                 }
@@ -419,6 +489,7 @@ class Play_offs {
 
 class Match {
 
+    private $id;
     private $name;
     private $team1;
     private $team2;
@@ -442,6 +513,10 @@ class Match {
         $this->result[1] = $away;
     }
 
+    public function set_id($arg) {
+        $this->id = $arg;
+    }
+
     //GET
     public function get_name() {
         return $this->name;
@@ -457,6 +532,10 @@ class Match {
 
     public function get_result() {
         return $this->result;
+    }
+
+    public function get_id() {
+        return $this->id;
     }
 
     //functions

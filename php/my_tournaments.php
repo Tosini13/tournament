@@ -4,9 +4,10 @@
             <h3>+ Stwórz nowy turniej</h3>
         </div>
     </a>
+    <hr />
     <div>
         <?php
-        $result = $db->query("select * from tournaments, my_tournaments where login_user='" . $_SESSION['username'] . "' and id_tournament=id and start_date < " . date('YmdHis') . " and finish_date > " . date('YmdHis'));
+        $result = $db->query("select * from tournament, users where tournament.login = users.login and users.login='" . $_SESSION['username'] . "'  and start_date < " . date('YmdHis') . " and finish_date > " . date('YmdHis'));
         if ($result->rowCount()) {
             ?>
             <div id="live">
@@ -40,7 +41,7 @@
             <h3>DZISIAJ</h3>
             <div>
                 <?php
-                $result = $db->query("select * from tournaments, my_tournaments where login_user='" . $_SESSION['username'] . "' and id_tournament=id and start_date > " . date("YmdHis") . " and start_date < " . date("Ymd", strtotime("+1day")));
+                $result = $db->query("select * from tournament, users where tournament.login = users.login and users.login='" . $_SESSION['username'] . "'  and start_date > " . date("YmdHis") . " and start_date < " . date("Ymd", strtotime("+1day")));
                 if ($result->rowCount()) {
                     while ($data = $result->fetch()) {
                         $url = '_logos/' . $data['logo'];
@@ -71,7 +72,7 @@
             <h3>WKRÓTCE</h3>
             <div>
                 <?php
-                $result = $db->query("select * from tournaments, my_tournaments where login_user='" . $_SESSION['username'] . "' and id_tournament=id and start_date > " . date("YmdHis") . " and start_date > " . date("Ymd", strtotime("+1day")));
+                $result = $db->query("select * from tournament, users where tournament.login = users.login and users.login='" . $_SESSION['username'] . "'  and start_date > " . date("YmdHis") . " and start_date > " . date("Ymd", strtotime("+1day")));
                 if ($result->rowCount()) {
                     while ($data = $result->fetch()) {
                         $url = '_logos/' . $data['logo'];
@@ -102,7 +103,7 @@
             <h3>PRZESZŁE</h3>
             <div>
                 <?php
-                $result = $db->query("select * from tournaments, my_tournaments where login_user='" . $_SESSION['username'] . "' and id_tournament=id and finish_date < " . date('YmdHis') . " order by start_date desc");
+                $result = $db->query("select * from tournament, users where tournament.login = users.login and users.login='" . $_SESSION['username'] . "'  and finish_date < " . date('YmdHis') . " order by start_date desc");
                 if ($result->rowCount()) {
                     while ($data = $result->fetch()) {
                         $url = '_logos/' . $data['logo'];

@@ -1,10 +1,9 @@
 <?php
-
 require_once 'structures.php';
 if (isset($_SESSION['tournament'])) {
     $tournament = &$_SESSION['tournament'];
 } else {
-    $tournament = new Tournament($_GET['name'], $_GET['no_participants']);
+    $tournament = new Tournament($_GET['name'], $_GET['no_participants'], $_GET['start_date'], $_GET['end_date']);
     $_SESSION['tournament'] = &$tournament;
     if (isset($_GET['tournament_mode'])) {
         $tournament->set_mode($_GET['tournament_mode']);
@@ -22,7 +21,7 @@ if (isset($_SESSION['tournament'])) {
     }
 }
 
-
 if (isset($_POST['update'])) {
     require 'update_tournament_creation.php';
+    require 'toDB.php';
 }
